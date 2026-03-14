@@ -9,11 +9,11 @@ Segments 200 mall customers into 5 distinct groups based on **Annual Income** an
 ### Methodology
 
 1. Load and extract features from `Mall_Customers.csv`
-2. Build a **dendrogram** using Ward's minimum variance method to visualize cluster distances and determine optimal `k`
-3. Fit **Agglomerative Clustering** with `k=5` and Euclidean distance
+2. Build a **dendrogram** using Ward's minimum-variance method to visualize cluster distances and determine optimal _k_
+3. Fit **AgglomerativeClustering** with `k=5` and Euclidean distance
 4. Visualize the resulting customer segments
 
-Both Python and R implementations follow the same workflow and produce identical results.
+Both Python and R implementations follow the same workflow and produce equivalent results.
 
 ## Dataset
 
@@ -29,12 +29,24 @@ Both Python and R implementations follow the same workflow and produce identical
 
 Only **Annual Income** and **Spending Score** (columns 4–5) are used for clustering.
 
+## 🛠 Tech Stack
+
+| Tool | Purpose |
+|---|---|
+| 🐍 Python 3 | Primary implementation |
+| 📊 matplotlib | Plotting dendrograms and scatter charts |
+| 🔬 scikit-learn | `AgglomerativeClustering` |
+| 🧮 SciPy | `linkage` / `dendrogram` |
+| 🐼 pandas / NumPy | Data loading and array ops |
+| 📈 R | Alternative implementation |
+| 📦 cluster (R) | `clusplot` visualization |
+
 ## Dependencies
 
 ### Python
 
 ```bash
-pip install numpy matplotlib pandas scipy scikit-learn
+pip install -r requirements.txt
 ```
 
 ### R
@@ -53,21 +65,13 @@ python hc.py
 Rscript hc.R
 ```
 
-Both scripts expect `Mall_Customers.csv` in the working directory. Each produces two plots: a dendrogram and a cluster visualization.
+Both scripts expect `Mall_Customers.csv` in the same directory. Each produces two plots: a dendrogram and a cluster visualization.
 
-## Tech Stack
-
-- 🐍 Python 3 / R
-- 📊 matplotlib / `clusplot`
-- 🔬 scikit-learn (`AgglomerativeClustering`)
-- 🧮 scipy (`linkage`, `dendrogram`)
-- 🐼 pandas / numpy
-
-## Known Issues
+## ⚠️ Known Issues
 
 - **Hardcoded cluster count:** Both scripts fix `k=5`. No programmatic elbow or silhouette analysis is performed — the dendrogram is provided for visual inspection only.
-- **Blocking plots (Python):** `plt.show()` blocks execution. Close each plot window to proceed to the next one.
-- **No train/test split:** This is unsupervised clustering — no splitting is needed, but the code has no evaluation metric beyond visual inspection.
+- **Blocking plots (Python):** `plt.show()` blocks execution; close each plot window to proceed.
+- **No evaluation metric:** This is unsupervised clustering — results are assessed visually, not quantitatively.
 
 ## License
 
